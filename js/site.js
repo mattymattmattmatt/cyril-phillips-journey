@@ -75,27 +75,27 @@
       why: "From 6 July 1940 he was a Group I Blacksmith. He was re-graded Group I Fitter on 1 February 1944. The word written after Fitter is 'Ins', which the file does not spell out."
     },
     {
-      q: "The evidence suggests he left Australia in 1940 on which ship?",
-      choices: ["HMT Ekma, named in his record", "The hospital ship Manunda", "MV Nieuw Holland, about 90%", "The Duntroon, about 85%"],
+      q: "Which ship is the very probable one for his 1940 voyage?",
+      choices: ["HMT Ekma, named in his record", "The hospital ship Manunda", "MV Nieuw Holland, in convoy US 5", "The Duntroon"],
       answer: 2,
-      why: "His own record does not name the 1940 ship. The dates match the South Australian recovery sections, who embarked on the Nieuw Holland at Port Melbourne on 15 September. The booklet marks this 'high, about 90%'."
+      why: "His own record does not name the 1940 ship. Moran names the Nieuw Holland. Convoy US 5 left Fremantle on 22 September 1940. The fact-checked edition calls this very probable, not certain."
     },
     {
-      q: "Which part of the workshop does the evidence point to?",
-      choices: ["No. 5 Recovery Section, the one that went to Greece", "No. 4 Recovery Section, raised in Victoria", "No. 6 Recovery Section, about 80%", "The record names his section in so many words"],
+      q: "Which recovery section was he in?",
+      choices: ["No. 5, the one that went to Greece", "No. 4, raised in Victoria", "6 Australian Recovery Section, named by Bert Evans", "The service record prints the section on the first page"],
       answer: 2,
-      why: "His record never names the section. He joined in South Australia, he is on guard rosters drawn from 6 Recovery Section, and the Tobruk hospital dates fit that section. The booklet says about 80%, and it also notes one guard was drawn from MT Section."
+      why: "Bert Evans, SX4626, wrote in 1971 that Cyril was of 6 Aust Recovery Section, and that they served together from June 1940 to September 1942. That replaces the old estimate of about 80 percent. The full letter is on the Virtual War Memorial, not reprinted here."
     },
     {
-      q: "Why does the June 1941 hospital entry matter for Tobruk?",
+      q: "What establishes that he was inside Tobruk during the siege?",
       choices: [
-        "The entry itself says the word Tobruk",
-        "4 AGH was in Adelaide, so he had come home",
-        "The 2/4th AGH was inside the siege, and he rejoined his unit the same day",
-        "It shows he was wounded in the Easter Battle"
+        "The service record prints the word Tobruk on 14 June",
+        "Only a guess from the unit diary",
+        "Evans’s account, the 4 AGH admission, and the Rats of Tobruk register",
+        "He was wounded in the Easter Battle"
       ],
       answer: 2,
-      why: "On 14 June 1941 he was admitted to 4 Aust Gen Hosp with influenza, discharged on 17 June (enteritis) and rejoined his unit that day. The 2/4th AGH was inside Tobruk. The booklet calls his presence in the siege probable, about 70 to 75%, and it notes a caveat: twelve men of the section on leave could not get back in."
+      why: "On 14 June 1941 he was admitted to 4 Aust Gen Hosp, inside the siege, and rejoined his unit on 17 June. Evans describes the siege from inside. The Rats of Tobruk Association register lists SX8216. The windmill site is still unlocated."
     },
     {
       q: "Where does the war diary put 6 Recovery Section on 11 April 1941?",
@@ -129,12 +129,12 @@
       q: "What is true of the Rats of Tobruk and his medals?",
       choices: [
         "Rat of Tobruk was a seventh medal, posted to Borrika in 1954",
-        "His medal card is ticked for six awards. Rat of Tobruk was an association, not a medal",
+        "Six medals are ticked. The association register lists him. That is not a medal",
         "He was not eligible for the Africa Star",
         "The Pacific Star was for the Middle East"
       ],
       answer: 1,
-      why: "The card is ticked for the 1939-45 Star, Africa Star, Pacific Star, Defence Medal, War Medal 1939-45 and Australia Service Medal. If he was in the siege, he would also have qualified as a Rat of Tobruk. That was an association, not a medal. His being in the siege is itself an inference."
+      why: "The card is ticked for six awards. The Rats of Tobruk Association register lists SX8216. The name is a veteran identity, not a medal. His overseas days add as 692 plus 437, which is the official 1,129."
     }
   ];
 
@@ -148,7 +148,7 @@
     salient: "Background. From 30 April to 4 May the Memorial records the Battle of the Salient, another attack on the perimeter. It is not in Cyril's papers.",
     hosp: "14 June 1941, from his own record. Admitted to 4 Aust Gen Hosp with influenza. The 2/4th AGH was inside the siege.",
     back: "17 June 1941, from his own record. Discharged (the diagnosis now written as enteritis) and rejoined his unit the same day.",
-    out: "7-11 July 1941. 6 Recovery Section leaves Tobruk. On 11 July, 'Capt. Redpath and No. 6 Rec. Sec. marched in from Tobruk' to Barbara, in Palestine."
+    out: "11 July 1941. The diary records Captain Redpath and No. 6 Recovery Section marching in at Barbara, from Tobruk. Evans's night sailing sits after 17 June, when Cyril was back with his unit inside the fortress, and by about the first week of July."
   };
 
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -174,13 +174,50 @@
     if (p && p.catch) p.catch(function () { /* a browser may still refuse */ });
   }
 
+  var musicOn = true;
+  var targetVol = 0.7;
+  var currentMusic = null;
+  var fadeTimer = 0;
+
+  function musicFor(stopId) {
+    var home = { mallee: 1, woodside: 1, embark: 1, home42: 1, home44: 1, whole: 1 };
+    return home[stopId] ? "waltzing-matilda" : "well-meet-again";
+  }
+
   function setMusic(on) {
-    var waltz = track("waltz", true);
-    waltz.volume = 0.55;
-    if (on && soundOn) safePlay(waltz);
-    else waltz.pause();
+    musicOn = !!on;
     var box = $("#musicBox");
-    if (box) box.checked = on && soundOn;
+    if (box) box.checked = musicOn;
+    if (!musicOn || !soundOn) {
+      ["waltzing-matilda", "well-meet-again"].forEach(function (name) {
+        if (tracks[name]) tracks[name].pause();
+      });
+      return;
+    }
+    fadeTo(currentMusic || "waltzing-matilda");
+  }
+
+  function fadeTo(name) {
+    if (!name) return;
+    currentMusic = name;
+    if (!soundOn || !musicOn) return;
+    var next = track(name, true);
+    var prevName = name === "waltzing-matilda" ? "well-meet-again" : "waltzing-matilda";
+    var prev = tracks[prevName];
+    if (fadeTimer) cancelAnimationFrame(fadeTimer);
+    var start = performance.now();
+    if (next.paused) {
+      next.volume = 0;
+      safePlay(next);
+    }
+    function step(now) {
+      var p = Math.min(1, (now - start) / 1400);
+      next.volume = targetVol * p;
+      if (prev && prev !== next) prev.volume = Math.max(0, targetVol * (1 - p));
+      if (p < 1) fadeTimer = requestAnimationFrame(step);
+      else if (prev && prev !== next) prev.pause();
+    }
+    fadeTimer = requestAnimationFrame(step);
   }
 
   function setWind(on) {
@@ -268,6 +305,15 @@
   }
   var musicBox = $("#musicBox");
   if (musicBox) musicBox.addEventListener("change", function () { setMusic(musicBox.checked); });
+  var volume = $("#volume");
+  if (volume) {
+    volume.addEventListener("input", function () {
+      targetVol = Number(volume.value) / 100;
+      if (currentMusic && tracks[currentMusic] && !tracks[currentMusic].paused) {
+        tracks[currentMusic].volume = targetVol;
+      }
+    });
+  }
   var placeBox = $("#placeBox");
   if (placeBox) {
     placeBox.addEventListener("change", function () {
@@ -357,6 +403,19 @@
     else dialog.setAttribute("open", "");
   }
   document.addEventListener("click", function (e) {
+    var modeBtn = e.target.closest("[data-mode]");
+    if (modeBtn) {
+      var wrap = modeBtn.closest("[data-photo]");
+      var img = wrap && wrap.querySelector("img");
+      var mode = modeBtn.getAttribute("data-mode");
+      if (img && img.getAttribute("data-" + mode)) {
+        img.src = img.getAttribute("data-" + mode);
+        $all("[data-mode]", wrap).forEach(function (b) {
+          b.setAttribute("aria-pressed", b === modeBtn ? "true" : "false");
+        });
+      }
+      return;
+    }
     var btn = e.target.closest(".shot");
     if (!btn) return;
     var img = btn.querySelector("img");
@@ -580,6 +639,7 @@
       var id = order[rounded];
       var windy = id === "desert" || id === "tobruk" || id === "helwan" || id === "suez";
       setWind(windy);
+      fadeTo(musicFor(id));
     }
   }
 
