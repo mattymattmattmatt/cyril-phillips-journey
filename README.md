@@ -2,9 +2,9 @@
 
 A static family website that follows Cyril Roy Phillips, SX8216, Craftsman in the 2nd AIF, from enlistment at Adelaide in 1940 to discharge at Wayville in 1944. The story, the scroll-driven map, the Tobruk chapter, the timeline, the service-record stamps and the quiz all live in `index.html`, `css/` and `js/`.
 
-`source/` is the research the site is built from, and it stays in the repository: the family booklet (HTML chapters and PDF), his enlistment portrait (original and colourised), service record pages (NAA B883 SX8216), unit war diary pages (AWM52), public-domain AWM photographs, and the maps.
+`source/` is the research the site is built from, and it stays in the repository: the family booklet (HTML chapters and the first PDF), the November 2026 fact-checked edition (`source/Cyril_Roy_Phillips_SX8216_Fact_Checked_Edition.pdf`), his enlistment portrait (original and colourised), service record pages (NAA B883 SX8216), unit war diary pages (AWM52), public-domain AWM photographs, and the maps.
 
-Facts on the site come from that booklet. Anything the booklet marked as an inference is still marked **The evidence suggests**, with the same confidence and a **Based on** note. Wider events, such as the Siege of Tobruk or the campaign in Greece, are labelled as background.
+The fact-checked edition is the factual backbone of the site. What a record or a named witness establishes is said plainly. What is still only probable keeps a confidence label and a **Based on** note: the *Nieuw Holland* is “very probably” his 1940 ship, HMAS *Stuart* is a strong candidate for the Tobruk evacuation, the windmill is still unlocated, No. 1 Group at Greta is unproven, and Irene’s surname before marriage is unconfirmed. Wider events are labelled as background.
 
 ## GitHub Pages
 
