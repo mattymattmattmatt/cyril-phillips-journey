@@ -78,7 +78,7 @@
       q: "Which ship is the very probable one for his 1940 voyage?",
       choices: ["HMT Ekma, named in his record", "The hospital ship Manunda", "MV Nieuw Holland, in convoy US 5", "The Duntroon"],
       answer: 2,
-      why: "His own record does not name the 1940 ship. Moran names the Nieuw Holland. Convoy US 5 left Fremantle on 22 September 1940. The fact-checked edition calls this very probable, not certain."
+      why: "His own record does not name the 1940 ship. Moran’s p. 12 names the Nieuw Holland for the September party, Cyril’s sailing. Convoy US 5 left Fremantle on 22 September 1940. The August main body went by the Strathallan and then the President Doumer. The air-attack anecdote on p. 12 belongs to that August party. The fact-checked edition calls the Nieuw Holland very probable, not certain."
     },
     {
       q: "Which recovery section was he in?",

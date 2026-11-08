@@ -1053,7 +1053,22 @@ footer.site a { color: var(--brass-2); }
   line-height: 1.35;
   margin: 12px 0;
 }
+.card .quote {
+  font-size: 1.14rem;
+  line-height: 1.4;
+}
 .quote span { display: block; margin-top: 6px; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); }
+.page-scan {
+  max-width: 210px;
+  margin: 8px 0 0;
+}
+.page-scan img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--line);
+}
 
 @media (max-width: 700px) {
   .nav { padding: 0 8px; gap: 6px; }
